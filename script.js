@@ -203,7 +203,9 @@ const XP_SCHEDULES = {
 };
 
 function getLevelXPRewards(level) {
-  const pairCount = gameContent?.content?.science?.[`level${level}`]?.pairs?.length || 4;
+  const availablePairCount = gameContent?.content?.science?.[`level${level}`]?.pairs?.length || 4;
+  // Campaign boards always deal four pairs (eight cards), including Level 3's mixed pool.
+  const pairCount = Math.min(availablePairCount, 4);
   // A perfect game needs exactly one turn per pair. Two extra turns form the medium tier.
   const perfectTurns = pairCount;
   const mediumTurns = pairCount + 2;
@@ -279,8 +281,9 @@ function getTextCardType(value) {
 
 // --- Board Creation with Multiple Content Types Support ---
 function createBoard(pairs) {
-  // Use every pair defined by the GDD: 8 cards for Levels 1–2 and 16 for Level 3.
-  const boardPairs = pairs;
+  // Keep every campaign board at four pairs (4 columns x 2 rows).
+  // Larger level pools are shuffled so repeat plays do not always show the same clocks.
+  const boardPairs = pairs.length > 4 ? shuffle(pairs).slice(0, 4) : pairs;
   cardGrid.innerHTML = "";
   cardGrid.classList.toggle("card-grid--two-by-two", boardPairs.length === 2);
   const cardArray = [];

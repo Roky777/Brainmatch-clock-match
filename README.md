@@ -8,7 +8,7 @@ A Grade 2 memory game that teaches whole-hour analog clocks by matching each clo
 Progress through 3 levels of increasing difficulty:
 - **Level 1**: 4 pairs - 6:00, 7:00, 8:00 and 9:00
 - **Level 2**: 4 pairs - 1:00, 2:00, 4:00 and 10:00
-- **Level 3**: all 8 pairs on a 4 x 4 board
+- **Level 3**: 4 pairs randomly dealt from all 8 clock times on a 4 x 2 board
 
 ### Reflex Mode
 Fast-paced matching with a 2-second timer per card reveal.
