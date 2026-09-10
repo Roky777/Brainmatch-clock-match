@@ -1,0 +1,48 @@
+{
+    "textMode": {
+        "level1": {
+            "pairs": [
+                { "word": "Hot", "antonym": "Cold" },
+                { "word": "Big", "antonym": "Small" },
+                { "word": "Happy", "antonym": "Sad" },
+                { "word": "Fast", "antonym": "Slow" }
+            ]
+        }
+    },
+    "imageMode": {
+        "level1": {
+            "pairs": [
+                {
+                    "firstImage": "images/circle_red.webp",
+                    "firstImageAlt": "Red circle",
+                    "secondImage": "images/circle_blue.webp",
+                    "secondImageAlt": "Blue circle"
+                },
+                {
+                    "firstImage": "images/square_red.webp",
+                    "firstImageAlt": "Red square",
+                    "secondImage": "images/square_blue.webp",
+                    "secondImageAlt": "Blue square"
+                }
+            ],
+            "timer": 60
+        }
+    },
+    "mixedMode": {
+        "level1": {
+            "pairs": [
+                {
+                    "word": "Dog",
+                    "image": "images/dog.webp",
+                    "imageAlt": "A friendly dog"
+                },
+                {
+                    "word": "Cat",
+                    "image": "images/cat.webp",
+                    "imageAlt": "A cute cat"
+                }
+            ],
+            "timer": 45
+        }
+    }
+}

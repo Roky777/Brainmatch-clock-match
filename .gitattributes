@@ -1,0 +1,63 @@
+# Auto detect text files and perform LF normalization
+* text=auto
+
+# Source code - text files with LF line endings
+*.js text eol=lf diff=javascript
+*.json text eol=lf
+*.html text eol=lf diff=html
+*.css text eol=lf
+*.md text eol=lf diff=markdown
+*.xml text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+
+# Images - binary files without delta compression
+*.png binary -delta
+*.jpg binary -delta
+*.jpeg binary -delta
+*.gif binary -delta
+*.ico binary -delta
+*.webp binary -delta
+*.bmp binary -delta
+*.svg text eol=lf
+
+# Audio files - binary without delta compression
+*.mp3 binary -delta
+*.wav binary -delta
+*.ogg binary -delta
+*.m4a binary -delta
+*.flac binary -delta
+
+# Video files - binary without delta compression
+*.mp4 binary -delta
+*.webm binary -delta
+*.avi binary -delta
+*.mov binary -delta
+*.mkv binary -delta
+
+# Fonts - binary files
+*.woff binary -delta
+*.woff2 binary -delta
+*.ttf binary -delta
+*.otf binary -delta
+*.eot binary -delta
+
+# Archives - binary without delta compression
+*.zip binary -delta
+*.tar binary -delta
+*.gz binary -delta
+*.7z binary -delta
+*.rar binary -delta
+
+# Documents - binary files
+*.pdf binary -delta
+*.doc binary -delta
+*.docx binary -delta
+
+# Executables
+*.exe binary -delta
+*.dll binary -delta
+
+# Treat specific large files with special handling
+background-music.mp3 binary -delta
+*.png binary -delta

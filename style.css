@@ -1,0 +1,685 @@
+@import url('https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&display=swap');
+
+body {
+    background-image: url('card game bg.webp');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: sans-serif;
+}
+
+/* Utility */
+.hidden {
+    display: none !important;
+}
+
+/* Start Screen & Mode Selection */
+.start-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* background-color: #f7f3e9; */
+    padding: 30px;
+    /* border-radius: 15px; */
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); */
+    text-align: center;
+    width: 100%;
+    max-width: 800px;
+}
+
+
+/* Win/End Screen */
+.win-screen, .final-score-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    max-width: 450px;
+    text-align: center;
+    background-color: #f7f3e9;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#win-title, #final-title {
+    font-family: 'Mochiy Pop One', sans-serif;
+    color: #4b4b4b;
+    font-size: 2em;
+    margin-bottom: 15px;
+}
+
+.title-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 80px;
+}
+
+.game-title-image {
+    width: 100%;
+    max-width: 800px;
+    padding: 20px 40px;
+    margin-bottom: 0;
+}
+
+.variant-title {
+    margin: -22px 0 0;
+    color: #4b4b4b;
+    font-family: 'Mochiy Pop One', sans-serif;
+    font-size: clamp(1.45rem, 5vw, 2.5rem);
+    line-height: 1.15;
+}
+
+.subtitle-image {
+    width: 37.5%;
+    max-width: 300px;
+    padding: 0 5px;
+    margin-top: -6.875%;
+    margin-bottom: 0;
+}
+
+/* Media queries for better mobile responsiveness */
+@media (max-width: 768px) {
+    .subtitle-image {
+        margin-top: -8%;
+    }
+}
+
+@media (max-width: 480px) {
+    .subtitle-image {
+        margin-top: -10%;
+        padding: 0 3%;
+    }
+}
+
+.mode-selection {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 80%;
+}
+
+#start-reflex-button {
+    display: none;
+}
+
+.mode-button {
+    padding: 15px 20px;
+    font-size: 1.3em;
+    font-family: 'Mochiy Pop One', sans-serif;
+    background-color: #4b4b4b;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+.mode-button:hover {
+    transform: scale(1.05);
+    background-color: #926565;
+}
+
+/* Game Container */
+.game-container {
+    background-color: #f7f3e9;
+    padding: 24px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 720px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+header {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 18px;
+}
+
+.pause-button {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #926565;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    width: 50px;
+    height: 50px;
+    font-size: 1.8em;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    z-index: 100;
+}
+
+.pause-button:hover {
+    transform: scale(1.1);
+    background-color: #4b4b4b;
+}
+
+h1 {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    margin: 0 0 18px;
+    color: #4b4b4b;
+}
+
+.score-panel {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    align-items: center;
+    width: 100%;
+    min-height: 30px;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: clamp(1rem, 2.5vw, 1.35rem);
+    color: #4b4b4b;
+    font-weight: bold;
+}
+
+#level-display { margin-right: auto; }
+#turns-container { margin-left: auto; }
+#timer-container {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Card Grid and Cards */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: clamp(10px, 2vw, 20px);
+    perspective: 1000px;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+}
+
+.card-grid--two-by-two {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: min(100%, 360px);
+}
+.card { width: 100%; padding-top: 100%; position: relative; cursor: pointer; transform-style: preserve-3d; transition: transform 0.6s; }
+.game-container.is-peeking .card { transition-duration: 0.28s; }
+.card.flipped { transform: rotateY(180deg); }
+.card .front-face, .card .back-face { position: absolute; top: 0; left: 0; width: 100%; height: 100%; backface-visibility: hidden; background-size: contain; background-repeat: no-repeat; background-position: center; border-radius: 10px; display: flex; justify-content: center; align-items: center; box-sizing: border-box; border: 3px solid transparent; overflow: hidden; }
+.card .front-face { 
+    background-image: url('card(normal).webp'); 
+    transform: rotateY(180deg); 
+    font-size: 1.2em; 
+    color: #333; 
+    padding: 5px; 
+    font-weight: bold; 
+    text-align: center; 
+}
+.card .front-face.number-card {
+    font-family: 'Mochiy Pop One', sans-serif;
+    font-size: clamp(2.4rem, 8vw, 4.5rem);
+    color: #4b4b4b;
+}
+.card .front-face.time-card {
+    font-family: 'Mochiy Pop One', sans-serif;
+    font-size: clamp(1.15rem, 4.4vw, 2.45rem);
+    color: #365a7a;
+    white-space: nowrap;
+    letter-spacing: -0.04em;
+}
+.card .front-face.money-card {
+    font-family: 'Mochiy Pop One', sans-serif;
+    font-size: clamp(1.2rem, 4vw, 1.75rem);
+    color: #4b4b4b;
+    white-space: nowrap;
+}
+.card .front-face.letter-card {
+    font-family: 'Mochiy Pop One', sans-serif;
+    font-size: clamp(2.5rem, 9vw, 5rem);
+    color: #3d8fd1;
+}
+.card .front-face.word-card {
+    width: 100%;
+    height: 100%;
+    padding: clamp(5px, 1.5vw, 12px);
+    font-size: clamp(0.65rem, 3vw, 1rem);
+    line-height: 1.1;
+    text-align: center;
+    overflow-wrap: normal;
+    word-break: normal;
+    hyphens: auto;
+}
+.card .front-face.word-card.long-word {
+    font-size: clamp(0.6rem, 2.5vw, 0.9rem);
+    white-space: nowrap;
+}
+.card .front-face img {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+    border-radius: 5px;
+}
+.card .front-face img.body-part-image {
+    max-width: 78%;
+    max-height: 78%;
+}
+.card .front-face img.animal-image {
+    max-width: 76%;
+    max-height: 76%;
+}
+.card .front-face img.shadow-silhouette {
+    filter: brightness(0) saturate(100%) opacity(0.9);
+}
+.card .back-face { 
+    background-image: url('card4.webp'); 
+}
+.card.correct .front-face { background-image: url('card(correct).webp'); }
+.card.incorrect .front-face { background-image: url('card(incorrect).webp'); }
+.card.shake { animation: shake 0.4s; }
+@keyframes shake { 10%, 90% { transform: translateX(-4px) rotateY(180deg); } 30%, 70% { transform: translateX(4px) rotateY(180deg); } 50% { transform: translateX(-4px) rotateY(180deg); } }
+.card.reflex-active .front-face { animation: glow 1.5s infinite alternate; }
+@keyframes glow { from { box-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #0073e6, 0 0 20px #0073e6; border-color: #0073e6; } to { box-shadow: 0 0 10px #fff, 0 0 15px #0073e6, 0 0 20px #0073e6, 0 0 25px #0073e6; border-color: #66b3ff; } }
+
+/* Win/End Screen */
+.win-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    max-width: 450px;
+    text-align: center;
+    background-color: #f7f3e9;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* #win-title {
+    font-family: 'Mochiy Pop One', sans-serif;
+    color: #4b4b4b;
+    font-size: 2em;
+    margin-bottom: 15px;
+} */
+
+.win-stars { font-size: 3em; margin-bottom: 10px; }
+.win-stars .star { color: #d3d3d3; transition: color 0.3s; }
+.win-stars .star.filled { color: #ffd700; }
+
+.win-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 20px 0;
+    font-family: 'Mochiy Pop One', sans-serif;
+    color: #926565;
+    font-size: 24px;
+}
+
+.win-screen #win-title,
+.final-score-screen #final-title {
+    font-family: 'Mochiy Pop One', sans-serif;
+    font-size: 2em;
+    font-weight: normal;
+    letter-spacing: normal;
+}
+
+.win-screen .mode-button,
+.final-score-screen .mode-button {
+    font-family: 'Mochiy Pop One', sans-serif;
+    font-weight: normal;
+}
+
+#next-action-button {
+    margin-top: 15px;
+    width: 80%;
+}
+
+/* How to Play Popup */
+.how-to-play {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.how-to-play-content {
+    background-color: #f7f3e9;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+}
+
+.how-to-play-content {
+    box-sizing: border-box;
+    width: min(360px, calc(100vw - 32px));
+    max-width: none;
+    padding: 30px 24px 28px;
+}
+
+.how-to-play .tutorial-grid {
+    width: 100%;
+    margin: 0 0 24px;
+}
+
+.how-to-play h2 {
+    margin: 0 0 28px;
+    font-size: clamp(2rem, 10vw, 2.75rem);
+}
+
+.how-to-play p {
+    margin: 0 0 28px;
+    font-size: clamp(1.35rem, 6.5vw, 1.75rem);
+    line-height: 1.25;
+}
+
+.how-to-play #start-game-button {
+    min-width: 190px;
+    padding: 14px 24px;
+    font-size: clamp(1.35rem, 6vw, 1.7rem);
+}
+
+.how-to-play .tutorial-row {
+    width: 100%;
+    gap: clamp(14px, 5vw, 24px);
+}
+
+.how-to-play .tutorial-card {
+    width: min(132px, 36vw);
+    height: min(132px, 36vw);
+    flex: 0 0 auto;
+}
+
+.tutorial-play-button {
+    width: 76px;
+    height: 76px;
+    min-height: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border-radius: 50%;
+    font-size: 1.75em;
+    line-height: 1;
+}
+
+.tutorial-play-button:disabled {
+    cursor: wait;
+    opacity: 0.45;
+    transform: none;
+}
+
+.how-to-play h2 {
+    font-family: 'Mochiy Pop One', sans-serif;
+    color: #4b4b4b;
+    margin-bottom: 20px;
+}
+
+.tutorial-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.tutorial-row {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.tutorial-card {
+    width: 120px;
+    height: 120px;
+    position: relative;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    transition: transform 0.6s;
+}
+
+.tutorial-front, .tutorial-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    font-family: 'Mochiy Pop One', sans-serif;
+    font-size: 1.2em;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.tutorial-front {
+    background-image: url('card(normal).webp');
+    transform: rotateY(180deg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    color: #333;
+}
+
+.tutorial-front img {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+}
+
+.tutorial-front.number-card {
+    font-size: clamp(2.5rem, 12vw, 4.5rem);
+    color: #4b4b4b;
+}
+
+.tutorial-front.money-card {
+    font-size: clamp(1.2rem, 6vw, 1.75rem);
+    color: #4b4b4b;
+    white-space: nowrap;
+}
+
+.tutorial-back {
+    background-image: url('card4.webp');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.tutorial-card.flipped {
+    transform: rotateY(180deg);
+}
+
+.tutorial-card.correct .tutorial-front {
+    background-image: url('card(correct).webp');
+}
+
+.how-to-play p {
+    margin: 20px 0;
+    color: #4b4b4b;
+    font-family: 'Mochiy Pop One', sans-serif;
+    font-size: 1.1em;
+}
+
+/* Peek Timer Styles (Add this to your style.css) */
+/* In style.css, replace ALL previous peek-timer styles with this block */
+
+.peek-timer {
+    width: 100%;
+    height: 44px;
+    margin: 0 0 22px;
+    position: relative;
+    /* Flexbox to center the contents (the number and the block container) */
+    display: grid;
+    place-items: center;
+}
+
+.timer-blocks-container {
+    /* This container holds the blocks in a row */
+    display: flex;
+    gap: 6px; /* The space between each block */
+    position: static;
+    justify-self: center;
+}
+
+.timer-block {
+    width: 48px;
+    height: 28px;
+    background-color: #926565; /* Active block color */
+    border-radius: 6px;
+    box-shadow: inset 0 -3px 4px rgba(0,0,0,0.15);
+    /* Smooth transition for the disappearing effect */
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.timer-block.inactive {
+    /* The state of a "disappeared" block */
+    transform: scale(0.8);
+    opacity: 0;
+}
+
+.peek-timer{
+    font-family: 'Mochiy Pop One', sans-serif;
+    font-size: 1.8em;
+    color: white;
+    /* Using text-shadow to ensure readability against any background */
+    text-shadow: 0 0 5px rgba(0,0,0,0.5);
+    z-index: 5; /* Ensure the number is always on top */
+    position: relative; /* Let it sit naturally in the flex container */
+}
+
+/* Pause Menu */
+.pause-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.pause-menu-content {
+    background-color: #f7f3e9;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+}
+
+.pause-menu h2 {
+    font-family: 'Mochiy Pop One', sans-serif;
+    color: #4b4b4b;
+    margin-bottom: 20px;
+    font-size: 2em;
+}
+
+.pause-menu p {
+    margin: 20px 0;
+    color: #4b4b4b;
+    font-family: 'Mochiy Pop One', sans-serif;
+    font-size: 1.1em;
+}
+
+.pause-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+/* Pause Tutorial Popup */
+.pause-tutorial {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1001;
+}
+
+.pause-tutorial-content {
+    background-color: #f7f3e9;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+}
+
+.pause-tutorial h2 {
+    font-family: 'Mochiy Pop One', sans-serif;
+    color: #4b4b4b;
+    margin-bottom: 20px;
+}
+
+.pause-tutorial p {
+    margin: 20px 0;
+    color: #4b4b4b;
+    font-family: 'Mochiy Pop One', sans-serif;
+    font-size: 1.1em;
+}
+
+@media (max-width: 540px) {
+    .game-container {
+        width: calc(100% - 28px);
+        padding: 18px;
+        box-sizing: border-box;
+    }
+
+    header { margin-bottom: 14px; }
+
+    h1 { margin-bottom: 14px; }
+
+    .card-grid { gap: 9px; }
+
+    .peek-timer { margin-bottom: 16px; }
+
+    .timer-block {
+        width: 34px;
+        height: 23px;
+    }
+
+    .how-to-play-content {
+        width: calc(100vw - 28px);
+        padding: 28px 20px 26px;
+    }
+
+    .how-to-play .tutorial-grid { margin-bottom: 22px; }
+
+    .how-to-play h2 { margin-bottom: 24px; }
+
+    .how-to-play p { margin-bottom: 24px; }
+
+    .how-to-play .tutorial-card {
+        width: min(126px, 35vw);
+        height: min(126px, 35vw);
+    }
+}

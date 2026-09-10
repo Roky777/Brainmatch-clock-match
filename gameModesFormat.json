@@ -1,0 +1,122 @@
+{
+    "gameModeFormats": {
+        "textToText": {
+            "description": "Classic mode where players match text with text (like antonyms)",
+            "format": {
+                "science": {
+                    "level1": {
+                        "pairs": [
+                            {
+                                "word": "Hot",
+                                "antonym": "Cold"
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        "textToImage": {
+            "description": "Mode where players match text with corresponding images",
+            "format": {
+                "animals": {
+                    "level1": {
+                        "pairs": [
+                            {
+                                "word": "Lion",
+                                "image": "images/lion.webp",
+                                "imageAlt": "A majestic lion" 
+                            }
+                        ],
+                        "timer": 60
+                    }
+                }
+            }
+        },
+        "imageToImage": {
+            "description": "Mode where players match related images (like matching animal to its habitat)",
+            "format": {
+                "habitats": {
+                    "level1": {
+                        "pairs": [
+                            {
+                                "firstImage": "images/lion.webp",
+                                "firstImageAlt": "A lion",
+                                "secondImage": "images/savanna.webp",
+                                "secondImageAlt": "African savanna"
+                            }
+                        ],
+                        "timer": 60
+                    }
+                }
+            }
+        }
+    },
+    "usage": {
+        "instructions": [
+            "1. Choose a game mode format from above",
+            "2. Create your content following the chosen format in gameContent.json",
+            "3. Make sure all image paths are relative to the 'images' folder",
+            "4. Include meaningful alt text for accessibility",
+            "5. Optional timer can be added to any level"
+        ],
+        "examples": {
+            "textToImage_animals": {
+                "animals": {
+                    "level1": {
+                        "pairs": [
+                            {
+                                "word": "Lion",
+                                "image": "images/lion.webp",
+                                "imageAlt": "A majestic lion"
+                            },
+                            {
+                                "word": "Elephant",
+                                "image": "images/elephant.webp",
+                                "imageAlt": "An African elephant"
+                            }
+                        ],
+                        "timer": 60
+                    }
+                }
+            },
+            "imageToImage_shapes": {
+                "shapes": {
+                    "level1": {
+                        "pairs": [
+                            {
+                                "firstImage": "images/circle_red.webp",
+                                "firstImageAlt": "Red circle",
+                                "secondImage": "images/circle_blue.webp",
+                                "secondImageAlt": "Blue circle"
+                            },
+                            {
+                                "firstImage": "images/square_red.webp",
+                                "firstImageAlt": "Red square",
+                                "secondImage": "images/square_blue.webp",
+                                "secondImageAlt": "Blue square"
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    },
+    "implementation": {
+        "cardCreation": {
+            "textToText": "Use existing implementation, no changes needed",
+            "textToImage": "Create cards with text on one side and image on other side using <img> tag",
+            "imageToImage": "Create cards with images on both sides using <img> tag"
+        },
+        "HTMLStructure": {
+            "textCard": "<div class=\"front-face\">${item.value}</div>",
+            "imageCard": "<div class=\"front-face\"><img src=\"${item.value}\" alt=\"${item.alt}\"></div>"
+        },
+        "CSSConsiderations": {
+            "imageCards": [
+                "Add object-fit: contain to images",
+                "Consider different aspect ratios",
+                "Maintain consistent card sizes"
+            ]
+        }
+    }
+}

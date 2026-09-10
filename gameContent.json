@@ -1,0 +1,35 @@
+{
+  "gameMode": "textToImage",
+  "content": {
+    "science": {
+      "level1": {
+        "pairs": [
+          { "a": "6:00", "image": "images/grade2-clock-match/clock-6.svg", "imageAlt": "Analog clock showing 6 o'clock" },
+          { "a": "7:00", "image": "images/grade2-clock-match/clock-7.svg", "imageAlt": "Analog clock showing 7 o'clock" },
+          { "a": "8:00", "image": "images/grade2-clock-match/clock-8.svg", "imageAlt": "Analog clock showing 8 o'clock" },
+          { "a": "9:00", "image": "images/grade2-clock-match/clock-9.svg", "imageAlt": "Analog clock showing 9 o'clock" }
+        ]
+      },
+      "level2": {
+        "pairs": [
+          { "a": "1:00", "image": "images/grade2-clock-match/clock-1.svg", "imageAlt": "Analog clock showing 1 o'clock" },
+          { "a": "2:00", "image": "images/grade2-clock-match/clock-2.svg", "imageAlt": "Analog clock showing 2 o'clock" },
+          { "a": "4:00", "image": "images/grade2-clock-match/clock-4.svg", "imageAlt": "Analog clock showing 4 o'clock" },
+          { "a": "10:00", "image": "images/grade2-clock-match/clock-10.svg", "imageAlt": "Analog clock showing 10 o'clock" }
+        ]
+      },
+      "level3": {
+        "pairs": [
+          { "a": "1:00", "image": "images/grade2-clock-match/clock-1.svg", "imageAlt": "Analog clock showing 1 o'clock" },
+          { "a": "2:00", "image": "images/grade2-clock-match/clock-2.svg", "imageAlt": "Analog clock showing 2 o'clock" },
+          { "a": "4:00", "image": "images/grade2-clock-match/clock-4.svg", "imageAlt": "Analog clock showing 4 o'clock" },
+          { "a": "6:00", "image": "images/grade2-clock-match/clock-6.svg", "imageAlt": "Analog clock showing 6 o'clock" },
+          { "a": "7:00", "image": "images/grade2-clock-match/clock-7.svg", "imageAlt": "Analog clock showing 7 o'clock" },
+          { "a": "8:00", "image": "images/grade2-clock-match/clock-8.svg", "imageAlt": "Analog clock showing 8 o'clock" },
+          { "a": "9:00", "image": "images/grade2-clock-match/clock-9.svg", "imageAlt": "Analog clock showing 9 o'clock" },
+          { "a": "10:00", "image": "images/grade2-clock-match/clock-10.svg", "imageAlt": "Analog clock showing 10 o'clock" }
+        ]
+      }
+    }
+  }
+}

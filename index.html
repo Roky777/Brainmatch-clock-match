@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brain Match — Clock Match</title>
+    <!-- Link to your CSS file -->
+    <link rel="stylesheet" href="style.css?v=results-ui-v4">
+</head>
+<body>
+    <!-- Start Screen with Game Mode Selection -->
+    <div class="start-screen">
+        <div class="title-group">
+            <img src="./Game-Title.webp" alt="Brain Match Title" class="game-title-image">
+            <h1 class="variant-title">CLOCK MATCH</h1>
+        </div>
+        <div class="mode-selection">
+            <button id="start-campaign-button" class="mode-button">Start Game</button>
+            <button id="start-reflex-button" class="mode-button">Reflex Mode</button>
+        </div>
+    </div>
+
+    <!-- How to Play Popup -->
+    <div class="how-to-play hidden">
+        <div class="how-to-play-content">
+            <h2>How to Play</h2>
+            <div class="tutorial-grid">
+                <div class="tutorial-row">
+                    <div class="tutorial-card" id="tutorial-card-1">
+                        <div class="tutorial-front"></div>
+                        <div class="tutorial-back"></div>
+                    </div>
+                    <div class="tutorial-card" id="tutorial-card-2">
+                        <div class="tutorial-front"></div>
+                        <div class="tutorial-back"></div>
+                    </div>
+                </div>
+            </div>
+            <p>Match each clock with its time!</p>
+            <button id="start-game-button" class="mode-button">Got it!</button>
+        </div>
+    </div>
+
+    </div>
+
+    <!-- Pause Menu -->
+    <!-- Pause Menu -->
+    <div class="pause-menu hidden">
+        <div class="pause-menu-content">
+            <h2>GAME PAUSED</h2>
+            <div class="pause-buttons">
+                <button id="tutorial-button" class="mode-button">Tutorial</button>
+                <button id="resume-button" class="mode-button">Resume</button>
+                <button id="exit-button" class="mode-button">Exit to Menu</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pause Tutorial Popup -->
+    <div class="pause-tutorial hidden">
+        <div class="pause-tutorial-content">
+            <h2>How to Play</h2>
+            <div class="tutorial-grid">
+                <div class="tutorial-row">
+                    <div class="tutorial-card pause-tutorial-card" id="pause-tutorial-card-1">
+                        <div class="tutorial-front"></div>
+                        <div class="tutorial-back"></div>
+                    </div>
+                    <div class="tutorial-card pause-tutorial-card" id="pause-tutorial-card-2">
+                        <div class="tutorial-front"></div>
+                        <div class="tutorial-back"></div>
+                    </div>
+                </div>
+            </div>
+            <p>Match each clock with its time!</p>
+            <button id="close-tutorial-button" class="mode-button">Got it!</button>
+        </div>
+    </div>
+
+    <!-- Main Game Container -->
+    <div class="game-container hidden">
+        <header>
+            <button id="pause-button" class="pause-button">⏸</button>
+            <h1>CLOCK MATCH</h1>
+            <div class="score-panel">
+                <span id="level-display">LEVEL 1</span>
+                <span id="turns-container"><span id="turns-label">TURNS</span>: <span id="turns">0</span></span>
+                <span id="timer-container" class="hidden">TIME: <span id="timer">00</span></span>
+            </div>
+        </header>
+    <!--     index.html, inside .game-container -->
+
+    <div class="peek-timer hidden">
+        <!-- This div will be filled with blocks by our script -->
+        <div class="timer-blocks-container"></div>
+        
+        <!-- A single, centered number on top -->
+        <!-- <span class="timer-countdown">5</span> -->
+    </div>
+        <main class="card-grid"></main>
+    </div>
+
+    <!-- Win/End Screen -->
+    <div class="win-screen hidden">
+        <h2 id="win-title">LEVEL COMPLETE!</h2>
+        <div id="win-stars-container" class="win-stars">
+            <span class="star">★</span><span class="star">★</span><span class="star">★</span>
+        </div>
+        <div class="win-stats">
+            <div><span id="win-stats-label">TURNS</span>: <span id="win-stats-value">0</span></div>
+            <div id="win-xp-container">XP: <span id="win-xp">0</span></div>
+        </div>
+        <button id="next-action-button" class="mode-button">Next Level</button>
+    </div>
+
+    <div class="final-score-screen hidden">
+        <h2 id="final-title">GAME COMPLETE!</h2>
+        <div id="final-stars-container" class="win-stars">
+            <span class="star">★</span><span class="star">★</span><span class="star">★</span>
+        </div>
+        <div class="win-stats">
+            <div><span>TOTAL TURNS</span>: <span id="final-turns-value">0</span></div>
+            <div>TOTAL XP: <span id="final-xp-value">0</span></div>
+        </div>
+        <button id="main-menu-button" class="mode-button">Main Menu</button>
+    </div>
+    
+    <div class="last-score-display hidden">
+        <h3>Last Game</h3>
+        <div class="last-score-stats">
+            <div class="last-score-item">
+                <span class="last-score-label">TURNS</span>
+                <span class="last-score-value" id="last-score-turns">0</span>
+            </div>
+            <div class="last-score-item">
+                <span class="last-score-label">XP</span>
+                <span class="last-score-value" id="last-score-xp">0</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- <audio id="level-complete-sound" src="level-complete.ogg"></audio> -->
+
+    <!-- Sound Effects -->
+    <audio id="correct-sound" src="correct.ogg" preload="metadata"></audio>
+    <audio id="incorrect-sound" src="incorrect.ogg" preload="metadata"></audio>
+    <audio id="flip-sound" src="flip.ogg" preload="none"></audio>
+    <audio id="reflex-sound" src="reflex-chime.ogg" preload="none"></audio>
+    <audio id="background-music" src="background-music.mp3" preload="none" loop></audio>
+    <audio id="level-complete-sound" src="level-complete.ogg" preload="metadata"></audio>
+    <audio id="campaign-complete-sound" src="campaign-complete.ogg" preload="metadata"></audio>
+
+    <!-- Link to your JavaScript file -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+    
+    <!-- Analytics Bridge Library (POST requests) -->
+    <script src="js-analytics-bridge/analytics-bridge.js?v=3"></script>
+    
+    <!-- Progress Save System - Load in correct order -->
+    <script src="progress files/config.js"></script>
+    <script src="progress files/progressBridge.js"></script>
+    <script src="progress files/storageManager.js"></script>
+    <script src="progress files/validator.js"></script>
+    <script src="progress files/gameManager.js"></script>
+    
+    <!-- Main Game Script -->
+    <script src="script.js?v=clock-match-v1"></script>
+    
+    <!-- Analytics Integration (loads after game script) -->
+    <script src="analytics-integration.js"></script>
+</body>
+</html>
